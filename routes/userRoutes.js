@@ -42,6 +42,36 @@ router.post('/signup', (req, res) => {
 })
 
 
+router.post('/login', (req, res) => {
+    const {email, password} = req.body;
+
+    User.findOne({email})
+        .then((user) => {
+            if(user != null){
+                bcrypt.compare(password, user.password, (err, result) => {
+                    if(err) res.json({err})
+                    if(result){
+                        res.status(200).json({
+                            "status": true,
+                            "studentId" : user.studentId,
+                            "firstname" : user.firstname,
+                            "lastname" : user.lastname,
+                            "email" : user.email,
+                        })
+                    }
+                    else{
+                        res.status(404).json({
+                            "status" : false,
+                            "message": "Invalid Username and password"
+                        })
+                    }
+                })
+            }
+        })
+        .catch((err) => { res.json({err})})
+})
+
+
 
 
 
