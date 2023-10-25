@@ -27,7 +27,7 @@ const userSchema = mongoose.Schema({
     email: {
         type: String,
         required: true,
-        maxLength: 20,
+        maxLength: 50,
         unique: true
     },
     birthday: {
@@ -37,6 +37,11 @@ const userSchema = mongoose.Schema({
     gender: {
         type: String,
         enum: ['Male', 'Female', 'Other'],
+        required: true
+    },
+    accountType: {
+        type: String,
+        enum: ['student', 'faculty', 'admin', 'club admin'],
         required: true
     }
 });

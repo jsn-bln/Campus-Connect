@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 
 
 router.post('/signup', (req, res) => {
-    const {studentId, firstname, lastname, password, email, birthday, gender} = req.body;
+    const {studentId, firstname, lastname, password, email, birthday, gender, accountType} = req.body;
 
     if (!studentId || !firstname || !lastname || !password || !email || !birthday || !gender) {
         return res.status(400).json({ message: 'Missing required fields' });
@@ -22,7 +22,8 @@ router.post('/signup', (req, res) => {
                 password: hashedPassword,
                 email,
                 birthday,
-                gender
+                gender,
+                accountType
             })
 
             user
