@@ -71,7 +71,17 @@ router.post('/login', (req, res) => {
         .catch((err) => { res.json({err})})
 })
 
+router.get('/admin/getusers', (req, res) => {
+    User.find()
+        .then( users => {
+            if(users.length === 0) return res.status(404).json({ message : "No users found"});
 
+            res.status(200).json(users);
+        })
+        .catch((err) => {
+            return res.status(500).json(err);
+        })
+})
 
 
 
