@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const userRoutes = require('./routes/userRoutes')
-
+const itemRoutes = require('./routes/itemRoutes')
 
 const app = express();
 app.use(express.json());
@@ -20,7 +20,7 @@ db.once('open', () => { console.log('connected to mongodb!')})
 
 
 app.use('/api/v1/user', userRoutes);
-
+app.use('/api/v1/marketplace', itemRoutes);
 
 
 
