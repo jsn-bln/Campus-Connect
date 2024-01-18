@@ -3,10 +3,10 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Item = require('../model/itemSchema');
 const User = require('../model/userSchema');
-
+const upload = require('../middleware/upload');
 
 // create  new item posting
-router.post('/postItem', (req, res) => {
+router.post('/postItem', upload.single('itemImage'),(req, res) => {
     const { studentId, itemName, itemDescription, itemPrice, itemQuantity, itemCondition} = req.body;
 
     User.findOne({studentId})
@@ -24,8 +24,10 @@ router.post('/postItem', (req, res) => {
                     itemDescription,
                     itemPrice,
                     itemQuantity,
-                    itemCondition
+                    itemCondition,
+                    itemImage: req.file.path
                     })
+                
 
                 newItem
                     .save()
@@ -80,12 +82,25 @@ router.get('/account/items', (req, res) => {
 // delete an item
 router.delete('/delete', (req, res) => {
     const {id} = req.body;
-    Item.findOneAndDelete({ id : id})
+    Item.findOneAndDelete({ _id : id})
       .then((item) => {
             if(item == null) return res.status(404).json({ message : "Item not found"});
             res.status(200).json(item);
         })
       .catch((err) => {
+             res.status(500).json({ message : err.message});
+         })
+})
+
+// update an item
+router.put('/update', (req, res) => {
+    const {id, itemName, itemDescription, itemPrice, itemQuantity, itemCondition} = req.body;
+    Item.findOneAndUpdate({ _id : id}, {itemName, itemDescription, itemPrice, itemQuantity, itemCondition, itemImage})
+    .then((item) => {
+            if(item == null) return res.status(404).json({ message : "Item not found"});
+            res.status(200).json(item);
+        })
+    .catch((err) => {
              res.status(500).json({ message : err.message});
          })
 })

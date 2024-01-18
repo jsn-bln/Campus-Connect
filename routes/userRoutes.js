@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const User = require('../model/userSchema');
 const bcrypt = require('bcrypt');
-
+const upload = require('../middleware/upload');
 
 router.post('/signup', (req, res) => {
     const {studentId, firstname, lastname, password, email, birthday, gender, accountType} = req.body;

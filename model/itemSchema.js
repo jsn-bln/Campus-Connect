@@ -38,6 +38,9 @@ const itemSchema = mongoose.Schema({
         enum: ['Available', 'Sold'],
         default: 'Available'
     },
+    itemImage:{
+        type: String
+    }
 
 });
 

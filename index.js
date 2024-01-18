@@ -20,7 +20,7 @@ db.once('open', () => { console.log('connected to mongodb!')})
 
 
 app.use('/api/v1/user', userRoutes);
-app.use('/api/v1/marketplace', itemRoutes);
+app.use('/api/v1/marketplace',itemRoutes);
 
 
 
