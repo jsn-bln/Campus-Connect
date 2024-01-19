@@ -2,22 +2,22 @@ const mongoose = require('mongoose');
 
 
 const activitySchema = mongoose.Schema({
-    assignment:{
+    activityType:{
         type:String,
-        dueDate:Date
+        enum: ['Assignment', 'Labtest', 'Midterm Exam', 'Final Exam', 'Quiz', 'Other'],
+        required:true
     },
-    quiz:{
-        type:String,
-        dueDate:Date
-
+    dueDate:{
+        type:Date,
+        required:true
     },
-    exam:{
-        type:String,
-        date:Date
+    studentId:{
+        type:Number,
+        required:true
     },
-    labExercise:{
+    courseCode:{
         type:String,
-        dueDate:Date
+        required:true
     }
 
 

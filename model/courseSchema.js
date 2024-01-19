@@ -10,8 +10,28 @@ const courseSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    courseTime: {
-        type: Date
+    courseLectureTimeStart: {
+        type: Date,
+        required:true
+    },
+    courseLectureTimeEnd: {
+        type: Date,
+        required:true
+    },
+    courseLabTimeStart: {
+        type: Date,
+    },
+    courseLabTimeEnd: {
+        type: Date,
+    },
+    courseCode:{
+        type:String,
+        required:true,
+        unique:true
+    },
+    studentId:{
+        type:String,
+        required:true
     },
     instructor:{
         type:String
