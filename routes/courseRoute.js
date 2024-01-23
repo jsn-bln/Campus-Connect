@@ -72,5 +72,32 @@ router.get('/courses', (req, res) => {
 
 });
 
+router.delete('/deletecourse' , (req, res) => {
+    const {id} = req.body;
+    Course.findOneAndDelete({ _id : id})
+     .then((course) => {
+            if(course == null) return res.status(404).json({ message : "Course not found"});
+            res.status(200).json(course);
+        })
+     .catch((err) => {
+             res.status(500).json({ message : err.message});
+         })
+});
+
+
+// update a course
+router.put('/updatecourse', (req, res) => {
+    const {id, courseName, courseDescription, courseCode, courseLectureTimeStart, 
+        courseLectureTimeEnd, courseLabTimeStart, courseLabTimeEnd, 
+        instructor, location, studentId, labRequired} = req.body;
+    Course.findOneAndUpdate({ _id : id}, {courseName, courseDescription, courseCode, courseLectureTimeStart, 
+        courseLectureTimeEnd, courseLabTimeStart, courseLabTimeEnd, 
+        instructor, location, studentId})
+  .then((course) => {
+    if(course == null) return res.status(404).json({ message : "Course not found"});
+    res.status(200).json(course);
+  })
+})
+
 
 module.exports = router;
