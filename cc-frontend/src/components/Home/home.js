@@ -1,6 +1,6 @@
 import { styled, Button, Typography } from "@mui/material"
 import { blue } from "@mui/material/colors";
-import img1 from '../images/ccPic.jpg'
+import img1 from '../ImagesFrontend/ccPic.jpg'
 import React from 'react'
 import {Link} from "react-router-dom"
 const StyledButton = styled('button')({
