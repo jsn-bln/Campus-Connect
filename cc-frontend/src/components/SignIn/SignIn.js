@@ -12,7 +12,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import axios from 'axios';
 
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -20,13 +20,25 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const defaultTheme = createTheme();
 
 export default function SignInSide() {
+
+
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const creds = new FormData(event.currentTarget);
+    const data = {
+      email: creds.get('email'),
+      password: creds.get('password'),
+    };
+
+    axios.post("http://localhost:8080/api/v1/user/login", data)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+         console.log(err);
+       })
   };
 
   return (

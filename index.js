@@ -4,11 +4,11 @@ require('dotenv').config();
 const userRoutes = require('./routes/userRoutes')
 const itemRoutes = require('./routes/itemRoutes')
 const courseRoutes = require('./routes/courseRoute')
-
+const cors = require("cors")
 
 const app = express();
 app.use(express.json());
-
+app.use(cors());
 
 
 const port = process.env.port || 8080;

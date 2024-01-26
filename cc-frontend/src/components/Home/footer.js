@@ -23,7 +23,7 @@ function Footer() {
       bottom: 0,
       width: '100%',}}>
         
-        <Typography variant="body2" color="white" align="center">
+      <Typography variant="body2" color="white" align="center">
       {'Copyright © '}
       <Link color="inherit" href="*">
         Campus Connect

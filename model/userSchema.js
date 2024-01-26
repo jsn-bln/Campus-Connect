@@ -42,6 +42,7 @@ const userSchema = mongoose.Schema({
     accountType: {
         type: String,
         enum: ['student', 'faculty', 'admin', 'club admin'],
+        default:'student',
         required: true
     }
 });
