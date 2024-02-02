@@ -54,3 +54,15 @@ router.post('/activity', (req, res) => {
              })
         })
 })
+
+router.delete('/activity', (req, res) => {
+    const {id} = req.body;
+    Activity.findOneAndDelete({ _id : id})
+   .then((activity) => {
+            if(activity == null) return res.status(404).json({ message : "Activity not found"});
+            res.status(200).json(activity);
+        })
+   .catch((err) => {
+             res.status(500).json({ message : err.message});
+         })
+})
