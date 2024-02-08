@@ -23,7 +23,7 @@ import axios from 'axios';
 import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
 import {useNavigate} from 'react-router-dom';
-
+import { useEffect } from 'react';
 
 
 const defaultTheme = createTheme();
@@ -33,6 +33,13 @@ export default function Register() {
   const [registrationSuccess, setRegistrationSuccess] = React.useState(false);
   const [gender, setGender] = React.useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const userData = localStorage.getItem('userData');
+    if (userData) {
+      navigate("/User/landingpage");
+    }
+  }, [navigate]);
 
 
   const handleChange = (event) => {
@@ -88,8 +95,6 @@ export default function Register() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      
-
 
       {registrationSuccess && (
         <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">

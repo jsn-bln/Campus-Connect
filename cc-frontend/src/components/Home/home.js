@@ -3,6 +3,11 @@ import { blue } from "@mui/material/colors";
 import img1 from '../ImagesFrontend/ccPic.jpg';
 import React from 'react'
 import {Link} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
+
+
 const StyledButton = styled('button')({
     backgroundColor:'blue',
     color:'white',
@@ -14,7 +19,22 @@ const StyledButton = styled('button')({
    
 });
 
+
+
+
+
 function Home(){
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const userData = localStorage.getItem('userData');
+        if (userData) {
+          navigate("/User/landingpage");
+        }
+      }, [navigate]);
+
+
     return(
         <div style={{textAlign:'left'}}>
             <div>

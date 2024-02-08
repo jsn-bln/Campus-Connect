@@ -8,6 +8,7 @@ import LandingPage from "./components/User/LandingPage"
 import ProfilePage from "./components/User/ProfilePage"
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import Marketplace from './components/Marketplace/marketplace';
 
 
 
@@ -25,6 +26,7 @@ function App() {
             <Route path="/Register" element={<Register/>}/>
             <Route path="/User/LandingPage" element={<LandingPage/>}/>
             <Route path="/User/LandingPage/ProfilePage" element={<ProfilePage/>}/>
+            <Route path="/User/LandingPage/Marketplace" element={<Marketplace/>}/>
 
 
 

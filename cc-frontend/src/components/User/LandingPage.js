@@ -10,7 +10,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
+import Toolbar from '@mui/material/Toolbar'; 
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {Link} from "react-router-dom"
@@ -19,8 +19,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import SvgIcon  from '@mui/material/SvgIcon';
 import img1 from '../ImagesFrontend/socialHub.jpg'
 import TextField from '@mui/material/TextField'
-
- 
+import { useNavigate } from 'react-router-dom';
 
 function HomeIcon(props) {
     return (
@@ -32,16 +31,23 @@ function HomeIcon(props) {
 
 
 const cards = [
-    { id: 1, content: 'Social Hub', imageUrl: img1 },
-    { id: 2, content: 'Routine', imageUrl: 'https://source.unsplash.com/random?wallpapers&2' },
-    { id: 3, content: 'Marketplace', imageUrl: 'https://source.unsplash.com/random?wallpapers&3' },
-    { id: 4, content: 'Navigator', imageUrl: 'https://source.unsplash.com/random?wallpapers&4' },
+    { id: 1, content: 'Social Hub', imageUrl: img1 , path: "/"},
+    { id: 2, content: 'Routine', imageUrl: 'https://source.unsplash.com/random?wallpapers&2', path: "/" },
+    { id: 3, content: 'Marketplace', imageUrl: 'https://source.unsplash.com/random?wallpapers&3', path: "/User/LandingPage/marketplace" },
+    { id: 4, content: 'Navigator', imageUrl: 'https://source.unsplash.com/random?wallpapers&4', path: "/" },
   ];
+
 
 
 const defaultTheme = createTheme();
 
 export default function LandingPage() {
+
+  const navigate = useNavigate();
+
+  const userData = JSON.parse(localStorage.getItem('userData'));  
+  const { email, firstname, lastname, studentId }  = userData;
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
@@ -56,14 +62,25 @@ export default function LandingPage() {
           <TextField label="Search" variant="standard"  style={{marginLeft:'auto', marginRight:100}}>
 
           </TextField>
-          <Button variant="h6" sx={{marginLeft:'auto'}}>
-            Log Out
-          </Button>
+
+          <div>
+            <Button variant="h6" sx={{marginLeft:'auto'}} onClick={() => navigate('/User/landingpage/ProfilePage')}>
+                {firstname}
+              </Button>
+            <Button variant="h6" sx={{marginLeft:'auto'}} 
+            
+                onClick={() => {
+                  localStorage.removeItem('userData');
+                   navigate("/Signin")
+                }}>
+              Log Out
+            </Button>
+          </div>
+          
         </Toolbar>
        
       </AppBar>
       <main>
-        {/* Hero unit */}
         <Box
           sx={{
             bgcolor: 'background.paper',
@@ -91,7 +108,6 @@ export default function LandingPage() {
                 <Link to="ProfilePage">
                 <Button variant="contained">View Profile</Button>
                 </Link>
-              <Button variant="outlined">Filler Button</Button>
             </Stack>
           </Container>
         </Box>
@@ -119,7 +135,7 @@ export default function LandingPage() {
                     
                   </CardContent>
                   <CardActions>
-                    <Button size="small">View</Button>
+                    <Button size="small" onClick={() => navigate(card.path)}>View</Button>
                   </CardActions>
                 </Card>
               </Grid>

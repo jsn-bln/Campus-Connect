@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import { useEffect } from 'react';
 
 const defaultTheme = createTheme();
 
@@ -22,6 +22,14 @@ export default function SignInSide() {
 
 
   const navigate = useNavigate();
+
+
+  useEffect(() => {
+    const userData = localStorage.getItem('userData');
+    if (userData) {
+      navigate("/User/landingpage");
+    }
+  }, [navigate]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -31,11 +39,13 @@ export default function SignInSide() {
       password: creds.get('password'),
     };
 
+  
+
     axios.post("http://localhost:8080/api/v1/user/login", data)
       .then((response) => {
         console.log(response);
 
-        
+        localStorage.setItem('userData', JSON.stringify(response.data));
         navigate('/User/landingpage')
 
       })
