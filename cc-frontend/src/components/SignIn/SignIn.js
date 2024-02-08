@@ -13,7 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 
 
 const defaultTheme = createTheme();
@@ -21,7 +21,7 @@ const defaultTheme = createTheme();
 export default function SignInSide() {
 
 
-
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -34,6 +34,10 @@ export default function SignInSide() {
     axios.post("http://localhost:8080/api/v1/user/login", data)
       .then((response) => {
         console.log(response);
+
+        
+        navigate('/User/landingpage')
+
       })
       .catch((err) => {
          console.log(err);

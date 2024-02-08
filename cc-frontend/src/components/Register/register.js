@@ -22,7 +22,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import axios from 'axios';
 import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
-
+import {useNavigate} from 'react-router-dom';
 
 
 
@@ -32,6 +32,8 @@ export default function Register() {
 
   const [registrationSuccess, setRegistrationSuccess] = React.useState(false);
   const [gender, setGender] = React.useState('');
+  const navigate = useNavigate();
+
 
   const handleChange = (event) => {
     setGender(event.target.value);
@@ -59,6 +61,7 @@ export default function Register() {
       .then((response) => {
         if(response.status){
           setRegistrationSuccess(true);
+          navigate('/login');
         }
       })
       .catch((error) => {
@@ -90,7 +93,7 @@ export default function Register() {
 
       {registrationSuccess && (
         <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
-          Signup success, wait for x business days for account confirmation
+          Signup success
         </Alert>
       )}
 
