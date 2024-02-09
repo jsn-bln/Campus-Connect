@@ -74,12 +74,16 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const defaultTheme = createTheme();
 
 function SocialPage(){
+  const [open, setOpen] = React.useState(true);
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
    
     return (
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
         <Box sx={{ display: 'flex' }}>
-          <AppBar position="absolute" >
+          <AppBar position="absolute"  open={open} >
             
             <Toolbar
               sx={{
@@ -90,6 +94,7 @@ function SocialPage(){
                 edge="start"
                 color="inherit"
                 aria-label="open drawer"
+                onClick={toggleDrawer}
                 sx={{
                   marginRight: '36px',
                   ...({ display: 'none' }),
@@ -114,7 +119,7 @@ function SocialPage(){
             </Toolbar>
           </AppBar>
       
-          <Drawer variant="permanent" >
+          <Drawer variant="permanent"  open={open} >
             <Toolbar
               sx={{
                 display: 'flex',
@@ -123,7 +128,7 @@ function SocialPage(){
                 px: [1],
               }}
             >
-              <IconButton>
+              <IconButton onClick={toggleDrawer}>
                 <ChevronLeftIcon />
               </IconButton>
             </Toolbar>
@@ -148,14 +153,11 @@ function SocialPage(){
             <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <p>Social Hub</p>
               <Grid container spacing={3}>
-                {/* User Statistics */}
                 <Grid item xs={12} md={6} lg={3}>
                   <Paper sx={{ p: 2, height: '100%' }}>
-                    {/* User statistics component */}
                     <Typography variant="h6" gutterBottom>
                       Friends
                     </Typography>
-                    {/* Place your user statistics here */}
                   </Paper>
                 </Grid>
                 {/* Recent Activities */}

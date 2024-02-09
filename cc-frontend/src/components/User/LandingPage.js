@@ -18,6 +18,11 @@ import {Link} from "react-router-dom"
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import SvgIcon  from '@mui/material/SvgIcon';
 import img1 from '../ImagesFrontend/socialHub.jpg'
+import img2 from '../ImagesFrontend/routine.jpg'
+import img3 from '../ImagesFrontend/marketPlace.jpg'
+import img4 from '../ImagesFrontend/map.jpg'
+
+
 import TextField from '@mui/material/TextField'
 import { useNavigate } from 'react-router-dom';
 
@@ -32,9 +37,9 @@ function HomeIcon(props) {
 
 const cards = [
     { id: 1, content: 'Social Hub', imageUrl: img1 , path: "/User/LandingPage/SocialPage"},
-    { id: 2, content: 'Routine', imageUrl: 'https://source.unsplash.com/random?wallpapers&2', path: "/User/LandingPage/RoutinePage" },
-    { id: 3, content: 'Marketplace', imageUrl: 'https://source.unsplash.com/random?wallpapers&3', path: "/User/LandingPage/marketplace" },
-    { id: 4, content: 'Navigator', imageUrl: 'https://source.unsplash.com/random?wallpapers&4', path: "/User/LandingPage/NavigationPage" },
+    { id: 2, content: 'Routine', imageUrl: img2, path: "/User/LandingPage/RoutinePage" },
+    { id: 3, content: 'Marketplace', imageUrl: img3, path: "/User/LandingPage/marketplace" },
+    { id: 4, content: 'Navigator', imageUrl: img4, path: "/User/LandingPage/NavigationPage" },
   ];
 
 
