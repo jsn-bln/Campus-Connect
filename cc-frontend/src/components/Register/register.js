@@ -24,7 +24,7 @@ import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
 import {useNavigate} from 'react-router-dom';
 import { useEffect } from 'react';
-
+import "./register.css";
 
 const defaultTheme = createTheme();
 
@@ -128,17 +128,26 @@ export default function Register() {
                   fullWidth
                   id="studentNumber"
                   label="Student Number"
+                  inputProps={{ style: { color: '#ffffff' } }}
+                  InputLabelProps={{
+                    style: { color: '#ffffff' }
+                  }}
                   autoFocus
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  className='register-field'
                   autoComplete="given-name"
                   name="firstName"
                   required
                   fullWidth
                   id="firstName"
                   label="First Name"
+                  inputProps={{ style: { color: '#ffffff' } }}
+                  InputLabelProps={{
+                    style: { color: '#ffffff' } 
+                  }}
                   autoFocus
                 />
               </Grid>
@@ -150,6 +159,10 @@ export default function Register() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  inputProps={{ style: { color: '#ffffff' } }}
+                  InputLabelProps={{
+                    style: { color: '#FFFFFF' } 
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -160,6 +173,10 @@ export default function Register() {
                   label="Student Email Address"
                   name="email"
                   autoComplete="email"
+                  inputProps={{ style: { color: '#ffffff' } }}
+                  InputLabelProps={{
+                    style: { color: '#ffffff' } 
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -170,6 +187,10 @@ export default function Register() {
                   label="Password"
                   type="password"
                   id="password"
+                  inputProps={{ style: { color: '#ffffff' } }}
+                  InputLabelProps={{
+                    style: { color: '#ffffff' } 
+                  }}
                   autoComplete="new-password"
                 />
               </Grid>
@@ -182,6 +203,10 @@ export default function Register() {
                   type="password"
                   id="cpassword"
                   autoComplete="new-password"
+                  inputProps={{ style: { color: '#ffffff' } }}
+                  InputLabelProps={{
+                    style: { color: '#ffffff' } 
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -191,12 +216,15 @@ export default function Register() {
                   name="birthday"
                   label="Birthday"
                   renderInput={(props) => <TextField {...props} variant="outlined" fullWidth />}
+                  InputLabelProps={{
+                    className: 'date-picker-label'
+                  }}
                 />
               </LocalizationProvider>
               </Grid>
               <Grid item xs={12} sm={6}>
                   <FormControl fullWidth>
-                    <InputLabel id="gender-label">Gender</InputLabel>
+                    <InputLabel id="gender-label" >Gender</InputLabel>
                     <Select
                       labelId="gender-label"
                       id="gender"
@@ -204,8 +232,13 @@ export default function Register() {
                       onChange={handleChange}
                       label="Gender"
                       name='gender'
+                      sx={{
+                        '& .MuiInputLabel-root': {
+                          color: '#ffffff' // Set text color for the label
+                        }
+                      }}
                     >
-                      <MenuItem value="Male">Male</MenuItem>
+                      <MenuItem value="Male" >Male</MenuItem>
                       <MenuItem value="Female">Female</MenuItem>
                       <MenuItem value="Other">Other</MenuItem>
                     </Select>
