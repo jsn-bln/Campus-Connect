@@ -15,7 +15,7 @@
     width: 50%;
     margin-top: 10px;
 }
-.container{ 
+.profile-container{ 
     justify-content: center;
     align-items: center;
     display: flex;
@@ -32,9 +32,19 @@
 }
 .profile-btn{
     width: 100%;
-    margin-top: 10px;
-    background-color: #808080;
+    margin-top: 10px !important;
+    background-color: #808080!important;
 }
 .profile-btn:hover{
-    background-color: #666666;
+    background-color: #666666!important;
 }
+
+
+@media (max-width: 768px) {
+    .profile-container {
+        width: 80%;
+    }
+    .btn-grp{
+      width: 90%;
+    }
+  }
