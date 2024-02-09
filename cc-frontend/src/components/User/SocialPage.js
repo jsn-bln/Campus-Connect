@@ -97,7 +97,7 @@ function SocialPage(){
                 onClick={toggleDrawer}
                 sx={{
                   marginRight: '36px',
-                  ...({ display: 'none' }),
+                  ...({ display: 'flex' }),
                 }}
               >
                 <MenuIcon />
