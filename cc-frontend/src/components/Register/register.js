@@ -232,10 +232,8 @@ export default function Register() {
                       onChange={handleChange}
                       label="Gender"
                       name='gender'
-                      sx={{
-                        '& .MuiInputLabel-root': {
-                          color: '#ffffff' // Set text color for the label
-                        }
+                      InputLabelProps={{
+                        className: 'select-label'
                       }}
                     >
                       <MenuItem value="Male" >Male</MenuItem>

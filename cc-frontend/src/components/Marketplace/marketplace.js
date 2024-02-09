@@ -25,6 +25,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { useNavigate } from 'react-router-dom';
+import { red } from '@mui/material/colors';
 
 
 
@@ -106,7 +107,7 @@ export default function DrawerAppBar(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar component="nav">
+      <AppBar component="nav" sx={{ paddingTop: 0, backgroundColor: red }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -158,28 +159,27 @@ export default function DrawerAppBar(props) {
           {drawer}
         </Drawer>
       </nav>
-      <Box className='box-container' component="main" sx={{ p: 3 }}>
+      <Box className='box-container' component="main">
         <Toolbar />
         <div className='item-container'>
           {items.map(item => (
-            <Card sx={{ maxWidth: 345 }}>
+            <Card sx={{ maxWidth: 250, margin: 1.2 }}>
               <CardMedia
-                component="img"
-                alt={item.itemName}
-                height="140"
-                image={item.itemImage}
-              />
+                  component="img"
+                  alt={item.itemName}
+                  height="150"
+                  image="https://placehold.co/100x100"
+                />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                   {item.itemName}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {item.ItemDescription}
+                  {item.itemDescription}
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small">Share</Button>
-                <Button size="small">Learn More</Button>
+                <Button size="small">Details</Button>
               </CardActions>
             </Card>
           
