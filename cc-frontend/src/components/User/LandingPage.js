@@ -31,10 +31,10 @@ function HomeIcon(props) {
 
 
 const cards = [
-    { id: 1, content: 'Social Hub', imageUrl: img1 , path: "/"},
-    { id: 2, content: 'Routine', imageUrl: 'https://source.unsplash.com/random?wallpapers&2', path: "/" },
+    { id: 1, content: 'Social Hub', imageUrl: img1 , path: "/User/LandingPage/SocialPage"},
+    { id: 2, content: 'Routine', imageUrl: 'https://source.unsplash.com/random?wallpapers&2', path: "/User/LandingPage/RoutinePage" },
     { id: 3, content: 'Marketplace', imageUrl: 'https://source.unsplash.com/random?wallpapers&3', path: "/User/LandingPage/marketplace" },
-    { id: 4, content: 'Navigator', imageUrl: 'https://source.unsplash.com/random?wallpapers&4', path: "/" },
+    { id: 4, content: 'Navigator', imageUrl: 'https://source.unsplash.com/random?wallpapers&4', path: "/User/LandingPage/NavigationPage" },
   ];
 
 
@@ -51,7 +51,7 @@ export default function LandingPage() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <AppBar position="relative">
+      <AppBar position="absolute">
         <Toolbar>
             
 

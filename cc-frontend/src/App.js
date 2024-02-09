@@ -9,6 +9,10 @@ import ProfilePage from "./components/User/ProfilePage"
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import Marketplace from './components/Marketplace/marketplace';
+import SocialPage from './components/User/SocialPage'
+import NavigationPage from './components/User/NavigationPage'
+import RoutinePage from './components/User/RoutinePage'
+
 
 
 
@@ -27,6 +31,12 @@ function App() {
             <Route path="/User/LandingPage" element={<LandingPage/>}/>
             <Route path="/User/LandingPage/ProfilePage" element={<ProfilePage/>}/>
             <Route path="/User/LandingPage/Marketplace" element={<Marketplace/>}/>
+            <Route path="/User/LandingPage/SocialPage" element={<SocialPage/>}/>
+            <Route path="/User/LandingPage/NavigationPage" element={<NavigationPage/>}/>
+            <Route path="/User/LandingPage/RoutinePage" element={<RoutinePage/>}/>
+
+
+
 
 
 
