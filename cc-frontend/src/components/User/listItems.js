@@ -10,27 +10,66 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import MessageIcon from '@mui/icons-material/Message';
-export const socialListItems = (
-  <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Social" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <MessageIcon />
-      </ListItemIcon>
-      <ListItemText primary="Friends" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Notifications" />
-    </ListItemButton>
+import EventNoteIcon from '@mui/icons-material/EventNote';
+import StoreIcon from '@mui/icons-material/Store';
+export const socialListItems = [
+  {
+    text: 'Social',
+    path: '/User/LandingPage/SocialPage',
+    icon: <DashboardIcon />,
+  },
+  {
+    text: 'Message',
+    path: '/Messages',
+    icon: <MessageIcon />,
+  },
+  {
+    text: 'Friends',
+    path: '/Friends',
+    icon: <PeopleIcon />,
+  },
+  // <React.Fragment>
+    // <ListItemButton>
+    //   <ListItemIcon>
+    //     <DashboardIcon />
+    //   </ListItemIcon>
+    //   <ListItemText primary="Social" />
+    // </ListItemButton>
+    // <ListItemButton>
+    //   <ListItemIcon>
+    //     <MessageIcon />
+    //   </ListItemIcon>
+    //   <ListItemText primary="Friends" />
+    // </ListItemButton>
+    // <ListItemButton>
+    //   <ListItemIcon>
+    //     <PeopleIcon />
+    //   </ListItemIcon>
+    //   <ListItemText primary="Notifications" />
+    // </ListItemButton>
    
-  </React.Fragment>
-);
+  // </React.Fragment>
+];
+
+export const marketPlaceItems = [
+  {
+    text: 'MarketPlace',
+    path: '/User/LandingPage/Marketplace',
+    icon: <StoreIcon />,
+  },
+  
+];
+
+
+export const routineItems = [
+  {
+    text: 'Routine',
+    path: '/User/LandingPage/RoutinePage',
+    icon: <EventNoteIcon />,
+  },
+  
+];
+
+
+
 

@@ -16,12 +16,12 @@ import Paper from '@mui/material/Paper';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, socialListItems } from './listItems';
+import { mainListItems, marketPlaceItems, routineItems, socialListItems } from './listItems';
 import Message from './Messages';
 import Groups from './Groups';
 import HomeIcon from '@mui/icons-material/Home';
 import { Home } from '@mui/icons-material';
-import { Button } from '@mui/material';
+import { Button, ListItemText, ListItem, ListItemIcon } from '@mui/material';
 import {Link} from "react-router-dom"
 
 
@@ -135,7 +135,38 @@ function SocialPage(){
                 <Box>
                 <List component="nav">
                     
-                {socialListItems}
+                {socialListItems.map((item, index) => (
+                <Link key={index} to={item.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <ListItem >
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.text} />
+                  </ListItem>
+                </Link>
+
+              ))}
+                <Divider sx={{ my: 1 }} />
+                {marketPlaceItems.map((item, index) => (
+                <Link key={index} to={item.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <ListItem >
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.text} />
+                  </ListItem>
+                </Link>
+
+              ))}
+                <Divider sx={{ my: 1 }} />
+                {routineItems.map((item, index) => (
+                <Link key={index} to={item.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <ListItem >
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.text} />
+                  </ListItem>
+                </Link>
+
+              ))}
+
+                
+
                 </List>
                 </Box>
           </Drawer>
