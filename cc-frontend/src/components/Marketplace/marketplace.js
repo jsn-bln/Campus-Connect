@@ -24,7 +24,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -35,13 +35,23 @@ const drawerWidth = 240;
 
 export default function DrawerAppBar(props) {
   const { window } = props;
+  const navigate = useNavigate();
+
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const [items, setItems] = useState([]);
-  const userData = JSON.parse(localStorage.getItem('userData'));
-  if(userData){
-    const { email, firstname, lastname, studentId }  = userData;  
-  }
+  const [userData, setUserData] = useState(null);
+
+
+  useEffect(() => {
+    const storedUserData = localStorage.getItem('userData');
+    if (!storedUserData) {
+      navigate("/");
+    } else {
+      const parsedUserData = JSON.parse(storedUserData);
+      setUserData(parsedUserData);
+    }
+  }, [navigate]);
 
   useEffect(() => {
     const fetchData = () => {
@@ -62,6 +72,18 @@ export default function DrawerAppBar(props) {
 
 
 
+  if (userData === null) {
+    return <div>Loading...</div>;
+  }
+  
+  const { email, firstname, lastname, studentId } = userData || {};
+
+
+
+  
+
+
+
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
@@ -74,7 +96,7 @@ export default function DrawerAppBar(props) {
       <Divider />
       <List>
         <Button>Home</Button>
-        {/* <Button>{firstname}</Button> */}
+        <Button>{firstname}</Button>
       </List>
     </Box>
   );

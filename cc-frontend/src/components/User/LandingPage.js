@@ -14,6 +14,9 @@ import Toolbar from '@mui/material/Toolbar'; 
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {Link} from "react-router-dom"
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import SvgIcon  from '@mui/material/SvgIcon';
@@ -24,7 +27,8 @@ import img4 from '../ImagesFrontend/map.jpg'
 
 
 import TextField from '@mui/material/TextField'
-import { useNavigate } from 'react-router-dom';
+
+
 
 function HomeIcon(props) {
     return (
@@ -44,14 +48,38 @@ const cards = [
 
 
 
+
+
 const defaultTheme = createTheme();
 
 export default function LandingPage() {
 
-  const navigate = useNavigate();
 
-  const userData = JSON.parse(localStorage.getItem('userData'));  
-  const { email, firstname, lastname, studentId }  = userData;
+
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState(null);
+
+
+  useEffect(() => {
+    const storedUserData = localStorage.getItem('userData');
+    if (!storedUserData) {
+      navigate("/");
+    } else {
+      const parsedUserData = JSON.parse(storedUserData);
+      setUserData(parsedUserData);
+    }
+  }, [navigate]);
+
+
+  if (userData === null) {
+    return <div>Loading...</div>;
+  }
+
+  const { email, firstname, lastname, studentId } = userData || {};
+
+
+
+
 
   return (
     <ThemeProvider theme={defaultTheme}>

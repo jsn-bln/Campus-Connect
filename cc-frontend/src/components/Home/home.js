@@ -5,7 +5,7 @@ import React from 'react'
 import {Link} from "react-router-dom"
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-
+import "./home.css"
 
 
 const StyledButton = styled('button')({
@@ -36,40 +36,36 @@ function Home(){
 
 
     return(
-        <div style={{textAlign:'left'}}>
-            <div>
-            <h3 style={{color:'white',  position:'absolute', top:'25%', left:"10%"}}>Discover and <br/> join</h3>
-            <p style={{ position:'absolute', top:'40%', left:"10%"}}>Connect with students on your campus</p>
-            <h3 style={{color:'white', position:'absolute', top:0, left:"10%"}}>Campus Connect</h3>
+        <div className="home-container">
+            <div className="left-eml">
+                <h1>Campus Connect</h1>
+                <div>
+                    <h3>Discover and join</h3>
+                    <p>Connect with students on your campus</p>
+                </div>
+                
 
-            <div style={{position:'absolute', top:'5%'}}>
+                <div className="home-btngrp">
+                    <Link className="act-btn" to="/SignIn">
+                        <Button variant="contained">Log in</Button>
+                    </Link>
+
+                    <Link className="act-btn" to="/Register">
+                        <Button variant="contained">Join now</Button>
+                    </Link>
+                
+                 </div>
 
             
-            <img src={img1} alt="fav icon" 
-            style={{ height: '30%', width: '80%', top: '30%', right: '30%', borderRadius:'15%' }}/>
 
 
             </div>
-            <Link to="/SignIn">
-            <Button style={{position:'absolute', top:'50%', left: "10%"}}variant="contained">Log in</Button>
-
-            </Link>
-
-            <Link to="/Register">
-            <Button style={{position:'absolute',top:"55%",left:"10%"}}variant="contained">Join now</Button>
-            </Link>
-            </div>
-           
-        
-
+            <img className="hero-img" src={img1} alt="fav icon" />
 
             
 
         </div>
         
-        
-     
-
     )
 }
 export default Home
