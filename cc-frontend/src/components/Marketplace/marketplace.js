@@ -14,17 +14,53 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import './marketplace.css';
+import HomeIcon from '@mui/icons-material/Home';
+import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
+
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+
+
 
 
 const drawerWidth = 240;
 
-const userData = JSON.parse(localStorage.getItem('userData'));
-const { email, firstname, lastname, studentId }  = userData;
+
 
 
 export default function DrawerAppBar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const [items, setItems] = useState([]);
+  const userData = JSON.parse(localStorage.getItem('userData'));
+  if(userData){
+    const { email, firstname, lastname, studentId }  = userData;  
+  }
+
+  useEffect(() => {
+    const fetchData = () => {
+      axios.get('http://localhost:8080/api/v1/marketplace/items')
+        .then(response => {
+          const firstTenItems = response.data.slice(0, 10);
+          setItems(firstTenItems);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    };
+  
+    fetchData();
+
+  }, []);
+  
+
+
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -33,12 +69,12 @@ export default function DrawerAppBar(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
+        Campus Marketplace
       </Typography>
       <Divider />
       <List>
         <Button>Home</Button>
-        <Button>{firstname}</Button>
+        {/* <Button>{firstname}</Button> */}
       </List>
     </Box>
   );
@@ -59,16 +95,27 @@ export default function DrawerAppBar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-          >
-            Campus Marketplace
-          </Typography>
-          <div>
-            <Button className='nav-btn' variant="text">Home</Button>
-            <Button className='nav-btn' variant="text">{firstname}</Button>
+          <div className='nav-wrapper'>
+            <div className='nav-title'>
+              <Link to="/User/landingpage" style={{textDecoration: "none", color: "#ffffff"}}>
+                <HomeIcon sx={{ mr: 2 }}/>
+              </Link>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+              > 
+              
+                Campus Marketplace
+              </Typography>
+            </div>
+            <div className='main-container'>
+              <Button variant='text' className='cat-link'>Electonics</Button>
+              <Button className='cat-link' >Books</Button>
+              <Button className='cat-link' >Sporting goods</Button>
+              <Button className='cat-link' >Clothing</Button>
+              <Button className='cat-link' >Others</Button>
+            </div>
           </div>
         </Toolbar>
       </AppBar>
@@ -91,9 +138,33 @@ export default function DrawerAppBar(props) {
       </nav>
       <Box className='box-container' component="main" sx={{ p: 3 }}>
         <Toolbar />
-        <div className='main-container'>
+        <div className='item-container'>
+          {items.map(item => (
+            <Card sx={{ maxWidth: 345 }}>
+              <CardMedia
+                component="img"
+                alt={item.itemName}
+                height="140"
+                image={item.itemImage}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {item.itemName}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {item.ItemDescription}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small">Share</Button>
+                <Button size="small">Learn More</Button>
+              </CardActions>
+            </Card>
+          
+          ))}
+       </div>
 
-        </div>
+
       </Box>
     </Box>
   );
