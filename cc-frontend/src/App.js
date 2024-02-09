@@ -12,7 +12,7 @@ import Marketplace from './components/Marketplace/marketplace';
 import SocialPage from './components/User/SocialPage'
 import NavigationPage from './components/User/NavigationPage'
 import RoutinePage from './components/User/RoutinePage'
-
+import Details from './components/Marketplace/details'
 
 
 
@@ -34,12 +34,7 @@ function App() {
             <Route path="/User/LandingPage/SocialPage" element={<SocialPage/>}/>
             <Route path="/User/LandingPage/NavigationPage" element={<NavigationPage/>}/>
             <Route path="/User/LandingPage/RoutinePage" element={<RoutinePage/>}/>
-
-
-
-
-
-
+            <Route path="/User/LandingPage/Marketplace/Details" element={<Details/>}/>
           </Routes>
           
         </div>

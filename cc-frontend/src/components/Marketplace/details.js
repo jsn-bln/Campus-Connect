@@ -18,7 +18,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useItemId } from '../Context/context';
+
 
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -26,22 +26,21 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { useNavigate } from 'react-router-dom';
 import { red } from '@mui/material/colors';
-import Details from './details';
+import { useItemId } from '../Context/context';
+
 
 const drawerWidth = 240;
-
-
-
-
-export default function Marketplace(props) {
+export default function Details(props) {
   const { window } = props;
   const navigate = useNavigate();
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const [items, setItems] = useState([]);
+  const [item, setItem] = useState([]);
   const [userData, setUserData] = useState(null);
-  const { setItemId } = useItemId();
+  const { itemId } = useItemId();
+
+
 
   useEffect(() => {
     const storedUserData = localStorage.getItem('userData');
@@ -55,10 +54,13 @@ export default function Marketplace(props) {
 
   useEffect(() => {
     const fetchData = () => {
-      axios.get('http://localhost:8080/api/v1/marketplace/items')
+  
+      axios.post('http://localhost:8080/api/v1/marketplace/search/id', { id: itemId })
         .then(response => {
-          const firstTenItems = response.data.slice(0, 10);
-          setItems(firstTenItems);
+          const item = response.data;
+          setItem(item); 
+          console.log("use effect");
+          console.log(item);
         })
         .catch(error => {
           console.error('Error fetching data:', error);
@@ -66,19 +68,22 @@ export default function Marketplace(props) {
     };
   
     fetchData();
-
   }, []);
-  
 
+
+  if (item === null) {
+    return <div>Loading...</div>;
+  }
 
 
   if (userData === null) {
     return <div>Loading...</div>;
   }
+
+
+
   
   const { email, firstname, lastname, studentId } = userData || {};
-
-
 
 
   const handleDrawerToggle = () => {
@@ -99,13 +104,6 @@ export default function Marketplace(props) {
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
-
-  function handleClick(id) {
-    navigate(`/details/${id}`);
-  }
-
-
-
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -162,39 +160,22 @@ export default function Marketplace(props) {
           {drawer}
         </Drawer>
       </nav>
-      <Box className='box-container' component="main">
+      <Box className='' component="main">
         <Toolbar />
-        <div className='item-container'>
-          {items.map(item => (
-            <Card sx={{ maxWidth: 250, margin: 1.2 }}>
-              <CardMedia
-                  component="img"
-                  alt={item.itemName}
-                  height="150"
-                  image="https://placehold.co/100x100"
-                />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {item.itemName}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {item.itemDescription}
-                </Typography>
-              </CardContent>
-              <CardActions>
-              <Button size="small" 
-                      onClick={
-                        () => {
-                          setItemId(item._id);
-                          navigate('/User/LandingPage/Marketplace/Details')
-                        }
-                      }>Details</Button>
-             
+        <div className='detail-container'>
+          <div className='left-desc'>
+                <h2>{item.itemName}</h2>
+                <div>
+                    <span>Item Description</span>
+                    <p>{item.itemDescription}</p>
+                    <span>Item Price</span>
+                    <p>${item.itemPrice}</p>
+                    <span>Item Condition</span>
+                    <p>${item.itemCondition}</p>
+                </div>
 
-              </CardActions>
-            </Card>
-          
-          ))}
+          </div>
+          <img src='https://placehold.co/400x400'/>
        </div>
 
 
