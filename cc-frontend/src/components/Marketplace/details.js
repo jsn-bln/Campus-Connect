@@ -120,7 +120,7 @@ export default function Details(props) {
             <MenuIcon />
           </IconButton>
           <div className='nav-wrapper'>
-            <div className='nav-title'>
+            <div className='nav-title' style={{ display: 'flex', alignItems: 'center' }}>
               <Link to="/User/landingpage" style={{textDecoration: "none", color: "#ffffff"}}>
                 <HomeIcon sx={{ mr: 2 }}/>
               </Link>
@@ -176,7 +176,11 @@ export default function Details(props) {
 
           </div>
           <img src='https://placehold.co/400x400'/>
+         
        </div>
+       <Link to="/user/LandingPage/marketplace">
+            <Button variant='contained'>Go Back</Button>
+          </Link>
 
 
       </Box>

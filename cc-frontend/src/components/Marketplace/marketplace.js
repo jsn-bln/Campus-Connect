@@ -151,18 +151,18 @@ export default function Marketplace(props) {
     setMobileOpen((prevState) => !prevState);
   };
 
-  const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        Campus Marketplace
-      </Typography>
-      <Divider />
-      <List>
-        <Button>Home</Button>
-        <Button>{firstname}</Button>
-      </List>
-    </Box>
-  );
+  // const drawer = (
+  //   <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+  //     <Typography variant="h6" sx={{ my: 2 }}>
+  //       Campus Marketplace
+  //     </Typography>
+  //     <Divider />
+  //     <List>
+  //       <Button>Home</Button>
+  //       <Button>{firstname}</Button>
+  //     </List>
+  //   </Box>
+  // );
 
   const container = window !== undefined ? () => window().document.body : undefined;
 
