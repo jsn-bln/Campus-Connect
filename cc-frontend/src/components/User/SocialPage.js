@@ -16,7 +16,7 @@ import Paper from '@mui/material/Paper';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, marketPlaceItems, routineItems, socialListItems } from './listItems';
+import { mainListItems, marketPlaceItems, navigationItems, routineItems, socialListItems } from './listItems';
 import Message from './Messages';
 import Groups from './Groups';
 import HomeIcon from '@mui/icons-material/Home';
@@ -107,7 +107,7 @@ function SocialPage(){
               </Link>
               <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
 
-                Campus Connect
+                Campus Social
               </Typography>
               <IconButton color="inherit">
                 {/* <Link to="/User/LandingPage" style={{color:'white'}}>
@@ -118,7 +118,7 @@ function SocialPage(){
               </IconButton>
             </Toolbar>
           </AppBar>
-      
+              {/* bar on the left side */}
           <Drawer variant="permanent"  open={open} >
             <Toolbar
               sx={{
@@ -164,12 +164,24 @@ function SocialPage(){
                 </Link>
 
               ))}
+                <Divider sx={{ my: 1 }} />
+                {navigationItems.map((item,index)=>(
+                  <Link key={index} to={item.path} style={{textDecoration: 'none', color:'inherit'}}>
+                    <ListItem>
+                      <ListItemIcon>{item.icon}</ListItemIcon>
+                      <ListItemText primary={item.text}/>
+                    </ListItem>
+
+                  </Link>
+                ))}
+
 
                 
 
                 </List>
                 </Box>
           </Drawer>
+          {/* below is for cards */}
           <Box
             component="main"
             sx={{

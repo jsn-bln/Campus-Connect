@@ -12,6 +12,8 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import MessageIcon from '@mui/icons-material/Message';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import StoreIcon from '@mui/icons-material/Store';
+
+import MapIcon from '@mui/icons-material/Map';
 export const socialListItems = [
   {
     text: 'Social',
@@ -69,6 +71,18 @@ export const routineItems = [
   },
   
 ];
+
+
+
+export const navigationItems = [
+  {
+    text: 'Navigation',
+    path: '/User/LandingPage/NavigationPage',
+    icon: <MapIcon />,
+  },
+  
+];
+
 
 
 
