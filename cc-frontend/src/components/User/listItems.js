@@ -20,16 +20,16 @@ export const socialListItems = [
     path: '/User/LandingPage/SocialPage',
     icon: <DashboardIcon />,
   },
-  {
-    text: 'Message',
-    path: '/Messages',
-    icon: <MessageIcon />,
-  },
-  {
-    text: 'Friends',
-    path: '/Friends',
-    icon: <PeopleIcon />,
-  },
+  // {
+  //   text: 'Message',
+  //   path: '/User/LandingPage/SocialPage/Messages',
+  //   icon: <MessageIcon />,
+  // },
+  // {
+  //   text: 'Friends',
+  //   path: '/Friends',
+  //   icon: <PeopleIcon />,
+  // },
   // <React.Fragment>
     // <ListItemButton>
     //   <ListItemIcon>

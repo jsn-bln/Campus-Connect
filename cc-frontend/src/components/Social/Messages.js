@@ -16,19 +16,13 @@ import Paper from '@mui/material/Paper';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, marketPlaceItems, navigationItems, routineItems, socialListItems } from './listItems';
+import { mainListItems, marketPlaceItems, navigationItems, routineItems, socialListItems } from '../User/listItems';
 import Message from '../Social/Messages';
 import Groups from '../Social/Groups';
 import HomeIcon from '@mui/icons-material/Home';
 import { Home } from '@mui/icons-material';
 import { Button, ListItemText, ListItem, ListItemIcon } from '@mui/material';
-import {Link, useNavigate} from "react-router-dom"
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Card from '@mui/material/Card';
-
-
+import {Link} from "react-router-dom"
 
 
 const drawerWidth = 240;
@@ -78,25 +72,19 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   );
 const defaultTheme = createTheme();
 
-const cards = [
-  { id: 1, content: 'Messages', imageUrl: 'url(https://source.unsplash.com/random?wallpapers)' , path: "/User/LandingPage/SocialPage/Messages"},
-  { id: 2, content: 'Friends', imageUrl: 'url(https://source.unsplash.com/random?wallpapers)', path: "/User/LandingPage/SocialPage/Friends" },
-  { id: 3, content: 'Group', imageUrl: 'url(https://source.unsplash.com/random?wallpapers)', path: "/User/LandingPage/SocialPage/Groups" },
-  { id: 4, content: 'Search', imageUrl: 'url(https://source.unsplash.com/random?wallpapers)', path: "/User/LandingPage/SocialPage/Notifications" },
-];
 
 
-function SocialPage(){
-  const [open, setOpen] = React.useState(true);
-  const toggleDrawer = () => {
-    setOpen(!open);
-    
+
+
+
+
+function Messages(){
+    const [open, setOpen] = React.useState(true);
+    const toggleDrawer = () => {
+        setOpen(!open);
   };
-  const navigate = useNavigate();
-
-   
-    return (
-      <ThemeProvider theme={defaultTheme}>
+    return(
+        <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
         <Box sx={{ display: 'flex' }}>
           <AppBar position="absolute"  open={open} >
@@ -122,8 +110,8 @@ function SocialPage(){
               <HomeIcon sx={{ mr: 2 }} />
               </Link>
               <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-
-                Campus Social
+  
+                Campus Messages
               </Typography>
               <IconButton color="inherit">
                 {/* <Link to="/User/LandingPage" style={{color:'white'}}>
@@ -158,7 +146,7 @@ function SocialPage(){
                     <ListItemText primary={item.text} />
                   </ListItem>
                 </Link>
-
+  
               ))}
                 <Divider sx={{ my: 1 }} />
                 {marketPlaceItems.map((item, index) => (
@@ -168,7 +156,7 @@ function SocialPage(){
                     <ListItemText primary={item.text} />
                   </ListItem>
                 </Link>
-
+  
               ))}
                 <Divider sx={{ my: 1 }} />
                 {routineItems.map((item, index) => (
@@ -178,7 +166,7 @@ function SocialPage(){
                     <ListItemText primary={item.text} />
                   </ListItem>
                 </Link>
-
+  
               ))}
                 <Divider sx={{ my: 1 }} />
                 {navigationItems.map((item,index)=>(
@@ -187,13 +175,13 @@ function SocialPage(){
                       <ListItemIcon>{item.icon}</ListItemIcon>
                       <ListItemText primary={item.text}/>
                     </ListItem>
-
+  
                   </Link>
                 ))}
-
-
+  
+  
                 
-
+  
                 </List>
                 </Box>
           </Drawer>
@@ -208,40 +196,15 @@ function SocialPage(){
               flexDirection: 'column',
             }}
           >
-            <Container sx={{ py: 8 }} maxWidth="md">
-          {/* End hero unit */}
-          <p style={{display:'center'}}>Social Hub</p>
-         
-          <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={6}>
-                
-                                    <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {card.content}
-
-                    </Typography>
-                    
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" onClick={() => navigate(card.path)}>View</Button>
-                  </CardActions>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-        {/* --------------------- */}
-            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Toolbar />
             
-               
-                
-                
-                
-            </Container>
           </Box>
         </Box>
       </ThemeProvider>
-    );
-  }
+       
+        
+    )
+}
 
-export default SocialPage
+
+export default Messages

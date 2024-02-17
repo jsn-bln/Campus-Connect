@@ -36,8 +36,8 @@ import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Message from '../User/Messages';
-import Groups from '../User/Groups';
+import Message from '../Social/Messages';
+import Groups from '../Social/Groups';
 
 
 
