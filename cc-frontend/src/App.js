@@ -40,7 +40,7 @@ function App() {
             <Route path="/User/LandingPage/Marketplace/Details" element={<Details/>}/>
             <Route path="/User/LandingPage/SocialPage/Messages" element={<Messages/>}/>
             <Route path="/User/LandingPage/SocialPage/Groups" element={<Groups/>}/>
-            <Route path="/User/LandingPage/SocialPage/Notifications" element={<Notifications/>}/>
+            <Route path="/User/LandingPage/SocialPage" element={<Notifications/>}/>
 
 
           </Routes>

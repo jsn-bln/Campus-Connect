@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -19,19 +20,24 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, marketPlaceItems, navigationItems, routineItems, socialListItems } from './listItems';
 import Message from '../Social/Messages';
 import Groups from '../Social/Groups';
+import ChatUI from '../Social/ChatUI';
+import Notifications from '../Social/Notifications';
 import HomeIcon from '@mui/icons-material/Home';
 import { Home } from '@mui/icons-material';
-import { Button, ListItemText, ListItem, ListItemIcon } from '@mui/material';
+import { Button, ListItemText, ListItem, ListItemIcon, Icon } from '@mui/material';
 import {Link, useNavigate} from "react-router-dom"
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Card from '@mui/material/Card';
+import TextField from '@mui/material/TextField'
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import CloseIcon from '@mui/icons-material/Close'
 
 
 
-
-const drawerWidth = 240;
+const drawerWidth = 200;
 // Top bar
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -50,7 +56,7 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
-
+// side bar
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
       '& .MuiDrawer-paper': {
@@ -78,34 +84,129 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   );
 const defaultTheme = createTheme();
 
-const cards = [
-  { id: 1, content: 'Messages', imageUrl: 'url(https://source.unsplash.com/random?wallpapers)' , path: "/User/LandingPage/SocialPage/Messages"},
-  { id: 2, content: 'Friends', imageUrl: 'url(https://source.unsplash.com/random?wallpapers)', path: "/User/LandingPage/SocialPage/Friends" },
-  { id: 3, content: 'Group', imageUrl: 'url(https://source.unsplash.com/random?wallpapers)', path: "/User/LandingPage/SocialPage/Groups" },
-  { id: 4, content: 'Search', imageUrl: 'url(https://source.unsplash.com/random?wallpapers)', path: "/User/LandingPage/SocialPage/Notifications" },
+const items = [
+  { id: 1, content: 'Front Page', path: "/User/LandingPage/SocialPage"},
+  { id: 2, content: 'Friends',  path: "/User/LandingPage/SocialPage/Friends" },
+  { id: 3, content: 'Group', path: "/User/LandingPage/SocialPage/Groups" },
+  { id: 4, content: 'Messages', path: "/User/LandingPage/SocialPage/Messages" },
 ];
 
+const posts = [{id: 5, content: 'Front', path:"/User/LandingPage/SocialPage/Front"}]
+function MessagePopOut(){
+  const [isNotificationsOpen, setNotificationsOpen] = useState(false);
+
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const handleSnackbarClick = () => {
+    setIsChatOpen(false)
+    setNotificationsOpen(true);
+
+  }
+  
+
+  const [open, setOpen] = useState(true)
+  const handleClose = () => {
+   
+
+    setOpen(false)
+  }
+  return(
+    <>{!isChatOpen && (
+    <Snackbar
+    open = {open}
+    autoHideDuration={null}
+    onClose={handleClose}
+    anchorOrigin={{vertical:'bottom',horizontal:'left'}}
+    onClick={handleSnackbarClick}
+    action={
+      <IconButton size='small' aria-label='close' color='inherit' onClick={handleClose}>
+        <CloseIcon fontSize='small' />
+      </IconButton>
+    }
+    
+    >
+      
+      <MuiAlert
+       elevation={6}
+       variant='filled'
+       severity='info'
+       onClose={handleClose}
+       action={
+        <IconButton size='small' aria-label='close' color='inherit' onClick={handleClose}>
+          <CloseIcon fontSize='small'/>
+        </IconButton>
+       }
+      >
+        Notifications
+      </MuiAlert>
+
+
+
+    </Snackbar>
+    )}
+    </>
+  )
+}
 
 function SocialPage(){
+ 
+  //side bar
   const [open, setOpen] = React.useState(true);
+
+  // chat
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isNotificationsOpen, setNotificationsOpen] = useState(false);
+
+  // chat
+  const handleChatToggle = () => {
+    setIsChatOpen(!isChatOpen)
+    setNotificationsOpen(false)
+  }
+
+  const handleNotificationsToggle = () => {
+    setNotificationsOpen(!isNotificationsOpen)
+    setIsChatOpen(false)
+  }
+
+  const handleNotificationsClick = (path) => {
+    if(path === "/User/LandingPage/SocialPage/Messages"){
+      setIsChatOpen(true)
+    }
+    // }else{
+    //   setIsChatOpen(false)
+
+    // }
+       
+  
+  }
+ 
+
+  // Side bar
   const toggleDrawer = () => {
     setOpen(!open);
     
   };
+
+
+
   const navigate = useNavigate();
 
    
     return (
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
-        <Box sx={{ display: 'flex' }}>
-          <AppBar position="absolute"  open={open} >
+        <Box sx={{ display: 'flex', alignItems:'center' }}>
+          
+          <AppBar position="absolute"  open={open} style={{display: 'flex', justifyContent: 'center', width: '100%'}}>
             
             <Toolbar
+            
+            
+            
               sx={{
-                pr: '24px', // keep right padding when drawer closed
+                pr: '24px' // keep right padding when drawer closed
               }}
             >
+              
               <IconButton
                 edge="start"
                 color="inherit"
@@ -121,10 +222,22 @@ function SocialPage(){
               <Link to="/User/LandingPage" style={{color:'white'}}>
               <HomeIcon sx={{ mr: 2 }} />
               </Link>
+              
               <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
 
-                Campus Social
+                Campus Social 
+                
               </Typography>
+              <div className='main-container'>
+                {items.map((items) => (
+
+                  <Button key={items.id}className='cat-link' onClick={() => handleNotificationsClick(items.path)}>{items.content}</Button>
+                
+                  ))}
+        
+            </div>
+              <TextField label="Search" variant="filled" sx={{margin:'auto'}} />
+
               <IconButton color="inherit">
                 {/* <Link to="/User/LandingPage" style={{color:'white'}}>
                     <Button variant='text' style={{color:'white'}}>Go Home</Button>
@@ -197,41 +310,75 @@ function SocialPage(){
                 </List>
                 </Box>
           </Drawer>
+
+          <IconButton onClick={handleNotificationsToggle}>
+
+          <MessagePopOut/>
+
+
+          </IconButton>
+          {isChatOpen && <ChatUI onClose={handleChatToggle} />}
+          {isNotificationsOpen && <Notifications onClose={handleNotificationsToggle} />}
+
+
           {/* below is for cards */}
           <Box
             component="main"
             sx={{
               flexGrow: 1,
-              height: '100vh',
-              overflow: 'auto',
+              minHeight:'calc(100vh - 64px)', // subtracting the height of the appbar
+              overflowY: 'auto',
               display: 'flex',
               flexDirection: 'column',
             }}
+
+           
+             
+
+            
           >
-            <Container sx={{ py: 8 }} maxWidth="md">
+          <Container sx={{ py: 8, mt: 4, mb: 4  }} maxWidth="lg">
           {/* End hero unit */}
-          <p style={{display:'center'}}>Social Hub</p>
          
-          <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={6}>
-                
-                                    <CardContent sx={{ flexGrow: 1 }}>
+            {posts.map((posts) => (
+              <Card>
+
+                    <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                        {card.content}
+                      {posts.title}
+                    </Typography>
+                
+                    <Typography gutterBottom variant="h5" component="h2">
+                        {posts.content}
 
                     </Typography>
                     
                   </CardContent>
                   <CardActions>
-                    <Button size="small" onClick={() => navigate(card.path)}>View</Button>
+                    <Button size="small" onClick={() => navigate(posts.path)}>View</Button>
                   </CardActions>
-              </Grid>
+                  </Card>
             ))}
-          </Grid>
         </Container>
         {/* --------------------- */}
             <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+              Lorem Ipsum 
+              Lorem Ipsum
+
+              Lorem Ipsum
+
+              Lorem Ipsum
+
+              Lorem Ipsum
+              Lorem Ipsum
+
+              Lorem Ipsum
+
+
+
+            </Grid>
+
             
                
                 

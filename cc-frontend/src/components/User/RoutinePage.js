@@ -26,7 +26,7 @@ import {Link} from "react-router-dom"
 
 
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 // Top bar
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -87,7 +87,7 @@ const toggleDrawer = () => {
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
       <Box sx={{ display: 'flex' }}>
-        <AppBar position="absolute"  open={open} >
+        <AppBar position="absolute"  open={open} style={{display: 'flex', justifyContent: 'center', width: '100%'}} >
           
           <Toolbar
             sx={{

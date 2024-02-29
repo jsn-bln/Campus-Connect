@@ -51,7 +51,7 @@ export default function Marketplace(props) {
 
 
   // drawer
-  const drawerWidth = 240;
+  const drawerWidth = 200;
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -177,7 +177,7 @@ export default function Marketplace(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{ paddingTop: 0, backgroundColor: red }} position="absolute" open={open}>
+      <AppBar component="nav"  position="absolute" open={open} style={{display: 'flex', justifyContent: 'center', width: '100%'}}>
         <Toolbar sx={{
                 pr: '24px', // keep right padding when drawer closed
               }}>

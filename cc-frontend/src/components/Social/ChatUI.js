@@ -1,16 +1,15 @@
-
 import React from 'react';
 import { Paper, Box, Typography, Button, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close'
 
 
-function Notifications({onClose}){
+function ChatUI({onClose}){
     return(
         <Box sx={{position:'fixed', bottom:0, right:0, zIndex:999}}>
             <Paper>
                 <Box p={2}>
                     <Typography  variant='h6'>
-                        Notifications
+                        Messages
                     </Typography>
                 
                 </Box>
@@ -32,4 +31,4 @@ function Notifications({onClose}){
 }
 
 
-export default Notifications
+export default ChatUI
