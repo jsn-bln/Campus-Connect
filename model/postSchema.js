@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 
 const postSchema = mongoose.Schema({
-    StudentId:{
+    studentId:{
         type: Number,
         required:true,
         ref:'User'
