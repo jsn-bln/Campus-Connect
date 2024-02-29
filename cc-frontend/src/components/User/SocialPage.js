@@ -34,6 +34,7 @@ import TextField from '@mui/material/TextField'
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import CloseIcon from '@mui/icons-material/Close'
+import Posting from '../Social/posting';
 
 
 
@@ -148,7 +149,9 @@ function MessagePopOut(){
 }
 
 function SocialPage(){
- 
+  const navigate = useNavigate();
+
+  
   //side bar
   const [open, setOpen] = React.useState(true);
 
@@ -162,6 +165,7 @@ function SocialPage(){
     setNotificationsOpen(false)
   }
 
+  // notifications
   const handleNotificationsToggle = () => {
     setNotificationsOpen(!isNotificationsOpen)
     setIsChatOpen(false)
@@ -188,7 +192,6 @@ function SocialPage(){
 
 
 
-  const navigate = useNavigate();
 
    
     return (
@@ -338,6 +341,10 @@ function SocialPage(){
             
           >
           <Container sx={{ py: 8, mt: 4, mb: 4  }} maxWidth="lg">
+            <Box sx={{marginBottom: 2}}>
+              
+              <Posting/>
+            </Box>
           {/* End hero unit */}
          
             {posts.map((posts) => (

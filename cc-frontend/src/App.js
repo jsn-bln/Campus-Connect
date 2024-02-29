@@ -9,7 +9,7 @@ import ProfilePage from "./components/User/ProfilePage"
 import Messages from "./components/Social/Messages"
 import Groups from "./components/Social/Groups"
 import Notifications from "./components/Social/Notifications"
-
+import Posting from "./components/Social/posting"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import Marketplace from './components/Marketplace/marketplace';
 import SocialPage from './components/User/SocialPage'
@@ -41,6 +41,8 @@ function App() {
             <Route path="/User/LandingPage/SocialPage/Messages" element={<Messages/>}/>
             <Route path="/User/LandingPage/SocialPage/Groups" element={<Groups/>}/>
             <Route path="/User/LandingPage/SocialPage" element={<Notifications/>}/>
+            <Route path="/User/LandingPage/SocialPage/posting" element={<Posting/>}/>
+
 
 
           </Routes>
