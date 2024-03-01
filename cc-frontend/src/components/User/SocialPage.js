@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -35,7 +35,7 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import CloseIcon from '@mui/icons-material/Close'
 import Posting from '../Social/posting';
-
+import axios from 'axios';
 
 
 const drawerWidth = 200;
@@ -92,7 +92,6 @@ const items = [
   { id: 4, content: 'Messages', path: "/User/LandingPage/SocialPage/Messages" },
 ];
 
-const posts = [{id: 5, content: 'Front', path:"/User/LandingPage/SocialPage/Front"}]
 function MessagePopOut(){
   const [isNotificationsOpen, setNotificationsOpen] = useState(false);
 
@@ -150,6 +149,23 @@ function MessagePopOut(){
 
 function SocialPage(){
   const navigate = useNavigate();
+
+  const [posts, setPosts] = useState([])
+
+
+  const fetchPosts = async () =>{
+    try{
+      const response = await axios.get('http://localhost:8080/api/v1/post/posts');
+      setPosts(response.data)
+    }catch(error){
+      console.log('Error fetching posts: ', error)
+    }
+  }
+  useEffect(()=>{
+    fetchPosts();
+  }, [])
+
+
 
   
   //side bar
@@ -347,25 +363,27 @@ function SocialPage(){
             </Box>
           {/* End hero unit */}
          
-            {posts.map((posts) => (
-              <Card>
+            {posts.map((post) => (
+              <Card key={post._id}>
 
                     <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      {posts.title}
+                      {post.studentId}
                     </Typography>
                 
                     <Typography gutterBottom variant="h5" component="h2">
-                        {posts.content}
+                        {post.content}
 
                     </Typography>
                     
                   </CardContent>
                   <CardActions>
-                    <Button size="small" onClick={() => navigate(posts.path)}>View</Button>
+                    <Button size="small" onClick={() => navigate(post.path)}>View</Button>
                   </CardActions>
                   </Card>
             ))}
+
+
         </Container>
         {/* --------------------- */}
             <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>

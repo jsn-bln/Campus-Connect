@@ -7,6 +7,16 @@ const { post } = require('./userRoutes');
 
 
 
+router.get('/posts', async (req,res)=>{
+    try{
+        const posts = await Post.find();
+        res.status(200).json(posts);
+
+    }catch(error){
+        console.log('error getting posts: ', error)
+    }
+})
+
 router.post('/postComment', (req,res) =>{
     const { studentId, content } = req.body
     User.findOne({studentId}).then((user)=>{
@@ -24,7 +34,8 @@ router.post('/postComment', (req,res) =>{
             newPost.save().then(() =>{
                 res.status(201).json({
                     "status":true,
-                    "message": "Post created successfully"
+                    "message": "Post created successfully",
+                    "post": newPost
                 })
             })
         }
