@@ -4,8 +4,19 @@ const mongoose = require('mongoose')
 const postSchema = mongoose.Schema({
     studentId:{
         type: Number,
-        required:true,
-        ref:'User'
+        ref:'User',
+        required:true
+    },
+    firstname:{
+        type:String,
+        ref:'User',
+        required:true
+    },
+    lastname:{
+        type:String,
+        ref:'User',
+        required:true
+        
     },
 
     content:{

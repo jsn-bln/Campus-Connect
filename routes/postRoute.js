@@ -17,30 +17,47 @@ router.get('/posts', async (req,res)=>{
     }
 })
 
-router.post('/postComment', (req,res) =>{
-    const { studentId, content } = req.body
-    User.findOne({studentId}).then((user)=>{
+router.post('/postComment', async (req,res) =>{
+    const {firstname,lastname,studentId, content } = req.body
+
+    // lastname, studentId
+    try{
+        const user = await User.findOne({studentId})
         if(user == null){
             return res.status(404).json({
                 "status":false,
-                "message":"User not found"
-            })
-        }else{
-            const newPost = new Post({
-                studentId,
-                content
-            })
-
-            newPost.save().then(() =>{
-                res.status(201).json({
-                    "status":true,
-                    "message": "Post created successfully",
-                    "post": newPost
-                })
+                "message":"user not found"
             })
         }
-    })
+
+        const newPost = new Post({
+            studentId,
+            lastname,
+            firstname,
+            content
+        })
+        await newPost.save();
+
+
+        res.status(201).json({
+            "status":true,
+            "message": "Post created successfully",
+            "post": newPost
+        })
+
+        
+            
+    
+    
+    }catch(error){
+        console.error('Error creating post: ', error)
+        res.status(500).json({"status":false, "message":"error has occurred"})
+    }
+   
+           
+        
 })
+
 
 
 

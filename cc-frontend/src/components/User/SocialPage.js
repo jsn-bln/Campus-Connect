@@ -61,7 +61,7 @@ const AppBar = styled(MuiAppBar, {
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
       '& .MuiDrawer-paper': {
-        position: 'absolute',
+        position: 'fixed',
         whiteSpace: 'nowrap',
         width: drawerWidth,
         transition: theme.transitions.create('width', {
@@ -362,16 +362,24 @@ function SocialPage(){
               <Posting/>
             </Box>
           {/* End hero unit */}
-         
-            {posts.map((post) => (
-              <Card key={post._id}>
 
-                    <CardContent sx={{ flexGrow: 1 }}>
+            {posts.map((post) => (
+              <Container key={post._id} maxWidth="md" sx={{marginBottom:2}}>
+                <Card>
+
+                  <CardContent sx={{ flexGrow: 1,  py: 4, mt: 4, mb: 4, mx:8  }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      {post.studentId}
+                      {post.firstname} 
+
                     </Typography>
-                
                     <Typography gutterBottom variant="h5" component="h2">
+                      {post.lastname}
+
+                    </Typography>
+                    
+                   
+                
+                    <Typography gutterBottom variant="body1" component="p">
                         {post.content}
 
                     </Typography>
@@ -380,36 +388,14 @@ function SocialPage(){
                   <CardActions>
                     <Button size="small" onClick={() => navigate(post.path)}>View</Button>
                   </CardActions>
-                  </Card>
+                </Card>
+              </Container>
             ))}
+            
 
 
         </Container>
-        {/* --------------------- */}
-            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-              Lorem Ipsum 
-              Lorem Ipsum
-
-              Lorem Ipsum
-
-              Lorem Ipsum
-
-              Lorem Ipsum
-              Lorem Ipsum
-
-              Lorem Ipsum
-
-
-
-            </Grid>
-
             
-               
-                
-                
-                
-            </Container>
           </Box>
         </Box>
       </ThemeProvider>
