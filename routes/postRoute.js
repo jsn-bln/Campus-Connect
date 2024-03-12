@@ -61,14 +61,37 @@ router.post('/postComment', async (req,res) =>{
 
 
 
-router.delete('/delete', (req,res) =>{
-    const {id} = req.body;
-    Post.findOneAndDelete({ _id : id}).then((post) =>{
-        if(post == null) return res.status(404).json({"message":"Post not found"});
-        res.status(200).json(post)
-    }).catch((err)=>{
-        res.status(500).json({message: err.message})
-    })
+router.delete('/:postId', async (req,res) =>{
+    const postId = req.params.postId;
+    const studentId = req.body.studentId
+    try{
+        const post = await Post.findById(postId)
+        if(!post){
+            return res.status(404).json({
+                status:false,
+                message:'Post not found.'
+            })
+        }
+        console.log("student id", studentId)
+        console.log("student id from post", post.studentId)
+
+        if(post.studentId !== studentId){ // compare studentid with post's studentid
+            return res.status(403).json({
+                status:false,
+                message:'You are not authorized to delete this post.'
+            })
+        }
+       
+
+        await post.deleteOne();
+        return res.status(200).json({
+            status:true,
+            message:"Post deleted successfully",
+            deletedPost:post,
+        })
+    }catch(error){
+        console.error("Error has occurred: ", error)
+    }
 })
 
 

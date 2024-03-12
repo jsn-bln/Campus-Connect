@@ -149,8 +149,11 @@ function MessagePopOut(){
 
 function SocialPage(){
   const navigate = useNavigate();
+  const userData = JSON.parse(localStorage.getItem('userData'));
+  const { email, firstname, lastname, studentId }  = userData;
 
   const [posts, setPosts] = useState([])
+
 
 
   const fetchPosts = async () =>{
@@ -164,6 +167,23 @@ function SocialPage(){
   useEffect(()=>{
     fetchPosts();
   }, [])
+
+  const handleDeletePost = async (postId, studentId) =>{
+    try{
+        await axios.delete(`http://localhost:8080/api/v1/post/${postId}`,{
+          data:{ studentId }
+        })
+        
+        const updatedPosts = posts.filter(post => post._id !== postId)
+
+        setPosts(updatedPosts)
+        console.log(`post with id ${postId} deleted successfully`)
+
+    }catch(error){
+        console.error("An error has occurred:", error)
+    }
+
+}
 
 
 
@@ -252,7 +272,7 @@ function SocialPage(){
 
                   <Button key={items.id}className='cat-link' onClick={() => handleNotificationsClick(items.path)}>{items.content}</Button>
                 
-                  ))}
+                  ))} 
         
             </div>
               <TextField label="Search" variant="filled" sx={{margin:'auto'}} />
@@ -387,6 +407,7 @@ function SocialPage(){
                   </CardContent>
                   <CardActions>
                     <Button size="small" onClick={() => navigate(post.path)}>View</Button>
+                    <Button size='small' onClick={() => handleDeletePost(post._id, studentId)}>Delete</Button>
                   </CardActions>
                 </Card>
               </Container>

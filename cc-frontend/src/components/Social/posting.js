@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 function Posting(){
     const userData = JSON.parse(localStorage.getItem('userData'));
     const {firstname, lastname }  = userData;
-
     const [studentId, setStudentId] = useState('')
   
   
@@ -49,11 +48,12 @@ function Posting(){
             console.log(response.data)
             handleClose()
 
-
+ 
         }catch(error){
             console.error('Error creating post: ', error)
         }
     }
+
 
     const handleChangeContent = (e) =>{
         setContent(e.target.value)
