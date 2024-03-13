@@ -5,8 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Posting(){
     const userData = JSON.parse(localStorage.getItem('userData'));
-    const {firstname, lastname }  = userData;
-    const [studentId, setStudentId] = useState('')
+    const {firstname, lastname, studentId }  = userData;
   
   
     const [lastName, setLastName] = useState('')
@@ -33,7 +32,7 @@ function Posting(){
             console.log('Retrieved firstName:', {firstname});
             console.log('Retrieved lastName:', {lastname});
 
-            if(!firstname || !lastname){
+            if(!firstname || !lastname || !studentId){
                 console.error("User's first and last name not found in local storage")
                 return;
             }
@@ -59,9 +58,6 @@ function Posting(){
         setContent(e.target.value)
     }
 
-    const handleChangeStudentId = (e) =>{
-        setStudentId(e.target.value)
-    }
 
     const handleChangeLastName = (e)=>{
         setLastName(e.target.value)
@@ -90,7 +86,7 @@ function Posting(){
                   name="post"
                   autoComplete="post"
                   value={studentId}
-                  onChange={handleChangeStudentId}
+                //   onChange={handleChangeStudentId}
                   inputProps={{ style: { color: 'black' } }}
                   InputLabelProps={{
                     style: { color: 'black' } 
