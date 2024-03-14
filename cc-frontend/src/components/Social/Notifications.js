@@ -1,10 +1,11 @@
-
-import React from 'react';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import React, {useState, useEffect} from 'react';
 import { Paper, Box, Typography, Button, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close'
 
 
-function Notifications({onClose}){
+export default function Notifications({onClose}){
     return(
         <Box sx={{position:'fixed', bottom:0, right:0, zIndex:999}}>
             <Paper>
@@ -32,4 +33,51 @@ function Notifications({onClose}){
 }
 
 
-export default Notifications
+export function NotificationPopOut(){
+
+
+  const [open, setOpen] = useState(true)
+  const handleClose = () => {
+   
+
+    setOpen(false)
+  }
+
+
+
+  return(
+    <>{(
+    <Snackbar
+    open = {open}
+    anchorOrigin={{vertical:'top',horizontal:'right'}}
+    style={{top:'10%'}}
+    action={
+      <IconButton size='small' aria-label='close' color='inherit'>
+        <CloseIcon fontSize='small' />
+      </IconButton>
+    }
+ 
+    >
+      
+      <MuiAlert
+       elevation={6}
+       variant='filled'
+       severity='info'
+       action={
+        <IconButton size='small' aria-label='close' color='inherit'  onClick={handleClose}>
+          <CloseIcon fontSize='small'/>
+        </IconButton>
+       }
+      >
+        Notifications
+      </MuiAlert>
+
+
+
+     </Snackbar>
+    )}
+    </>
+  )
+}
+
+

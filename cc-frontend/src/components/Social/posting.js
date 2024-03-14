@@ -1,18 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Divider} from '@mui/material'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
 
 function Posting(){
     const userData = JSON.parse(localStorage.getItem('userData'));
     const {firstname, lastname, studentId }  = userData;
   
-  
-    const [lastName, setLastName] = useState('')
 
-    const [firstName, setFirstName] = useState('')
-
-    
     const [isOpen, setIsOpen] = useState(false)
     const [content, setContent] = useState('')
     const togglePopUp = () => {
@@ -25,10 +19,7 @@ function Posting(){
 
     const handleCreatePost = async () =>{
         try{
-
-          
-
-            
+  
             console.log('Retrieved firstName:', {firstname});
             console.log('Retrieved lastName:', {lastname});
 
@@ -59,13 +50,6 @@ function Posting(){
     }
 
 
-    const handleChangeLastName = (e)=>{
-        setLastName(e.target.value)
-    }
-
-    const handleChangeFirstName = (e)=>{
-        setFirstName(e.target.value)
-    }
 
     
 
@@ -86,41 +70,13 @@ function Posting(){
                   name="post"
                   autoComplete="post"
                   value={studentId}
-                //   onChange={handleChangeStudentId}
                   inputProps={{ style: { color: 'black' } }}
                   InputLabelProps={{
                     style: { color: 'black' } 
                   }}
             />  
             <Divider sx={{ my: 1 }} />
-
-            <TextField
-                  fullWidth
-                  label="First name"
-                  name="post"
-                  autoComplete="post"
-                  value={firstName}
-                  onChange={handleChangeFirstName}
-                  inputProps={{ style: { color: 'black' } }}
-                  InputLabelProps={{
-                    style: { color: 'black' } 
-                  }}
-            />
-                            <Divider sx={{ my: 1 }} />
-
-               <TextField
-                  fullWidth
-                  label="Last name"
-                  name="post"
-                  autoComplete="post"
-                  value={lastName}
-                  onChange={handleChangeLastName}
-                  inputProps={{ style: { color: 'black' } }}
-                  InputLabelProps={{
-                    style: { color: 'black' } 
-                  }}
-            />
-                <Divider sx={{ my: 1 }} />
+            <Divider sx={{ my: 1 }} />
 
                 <TextField
                   fullWidth

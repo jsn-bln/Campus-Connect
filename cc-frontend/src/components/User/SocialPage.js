@@ -10,30 +10,22 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, marketPlaceItems, navigationItems, routineItems, socialListItems } from './listItems';
 import Message from '../Social/Messages';
 import Groups from '../Social/Groups';
 import ChatUI from '../Social/ChatUI';
-import Notifications from '../Social/Notifications';
+import Notifications, {MessagePopOut, NotificationPopOut} from '../Social/Notifications';
 import HomeIcon from '@mui/icons-material/Home';
 import { Home } from '@mui/icons-material';
 import { Button, ListItemText, ListItem, ListItemIcon, Icon } from '@mui/material';
 import {Link, useNavigate} from "react-router-dom"
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Card from '@mui/material/Card';
 import TextField from '@mui/material/TextField'
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
-import CloseIcon from '@mui/icons-material/Close'
 import Posting from '../Social/posting';
 import axios from 'axios';
 
@@ -92,61 +84,6 @@ const items = [
   { id: 4, content: 'Messages', path: "/User/LandingPage/SocialPage/Messages" },
 ];
 
-function MessagePopOut(){
-  const [isNotificationsOpen, setNotificationsOpen] = useState(false);
-
-  const [isChatOpen, setIsChatOpen] = useState(false);
-  const handleSnackbarClick = () => {
-    setIsChatOpen(false)
-    setNotificationsOpen(true);
-
-  }
-  
-
-  const [open, setOpen] = useState(true)
-  const handleClose = () => {
-   
-
-    setOpen(false)
-  }
-  return(
-    <>{!isChatOpen && (
-    <Snackbar
-    open = {open}
-    autoHideDuration={null}
-    onClose={handleClose}
-    anchorOrigin={{vertical:'bottom',horizontal:'left'}}
-    onClick={handleSnackbarClick}
-    action={
-      <IconButton size='small' aria-label='close' color='inherit' onClick={handleClose}>
-        <CloseIcon fontSize='small' />
-      </IconButton>
-    }
-    
-    >
-      
-      <MuiAlert
-       elevation={6}
-       variant='filled'
-       severity='info'
-       onClose={handleClose}
-       action={
-        <IconButton size='small' aria-label='close' color='inherit' onClick={handleClose}>
-          <CloseIcon fontSize='small'/>
-        </IconButton>
-       }
-      >
-        Notifications
-      </MuiAlert>
-
-
-
-    </Snackbar>
-    )}
-    </>
-  )
-}
-
 function SocialPage(){
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem('userData'));
@@ -186,8 +123,6 @@ function SocialPage(){
 }
 
 
-
-  
   //side bar
   const [open, setOpen] = React.useState(true);
 
@@ -211,12 +146,7 @@ function SocialPage(){
     if(path === "/User/LandingPage/SocialPage/Messages"){
       setIsChatOpen(true)
     }
-    // }else{
-    //   setIsChatOpen(false)
-
-    // }
-       
-  
+   
   }
  
 
@@ -226,10 +156,6 @@ function SocialPage(){
     
   };
 
-
-
-
-   
     return (
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
@@ -302,7 +228,7 @@ function SocialPage(){
             </Toolbar>
                 <Box>
                 <List component="nav">
-                    
+                {/* Items on the sides */}
                 {socialListItems.map((item, index) => (
                 <Link key={index} to={item.path} style={{ textDecoration: 'none', color: 'inherit' }}>
                   <ListItem >
@@ -352,7 +278,8 @@ function SocialPage(){
 
           <IconButton onClick={handleNotificationsToggle}>
 
-          <MessagePopOut/>
+          <NotificationPopOut/>
+          
 
 
           </IconButton>
@@ -371,10 +298,7 @@ function SocialPage(){
               flexDirection: 'column',
             }}
 
-           
-             
 
-            
           >
           <Container sx={{ py: 8, mt: 4, mb: 4  }} maxWidth="lg">
             <Box sx={{marginBottom: 2}}>
