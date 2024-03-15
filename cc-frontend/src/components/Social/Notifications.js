@@ -49,8 +49,8 @@ export function NotificationPopOut(){
     <>{(
     <Snackbar
     open = {open}
-    anchorOrigin={{vertical:'top',horizontal:'right'}}
-    style={{top:'10%'}}
+    anchorOrigin={{vertical:'top',horizontal:'left'}}
+    style={{top:'10%', left:'10%'}}
     action={
       <IconButton size='small' aria-label='close' color='inherit'>
         <CloseIcon fontSize='small' />

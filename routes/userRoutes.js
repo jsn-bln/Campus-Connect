@@ -86,6 +86,30 @@ router.get('/admin/getusers', (req, res) => {
         })
 })
 
+router.get('/search', async (req, res) => {
+    const {firstname, lastname} = req.query;
+
+    try{
+        let query = {};
+        if (firstname) query.firstname = {$regex:firstname, $options: 'i'}
+        if (lastname) query.lastname = {$regex:lastname, $options: 'i'}
+
+        const users = await User.find(query).limit(10)
+        if(users.length == 0){
+            return res.status(404).json({
+                message:"No users found"
+            })
+        }
+        res.status(200).json(users)
+
+    }catch(error){
+        return res.status(500).json(error)
+    }
+
+    
+})
+
+
 
 
 module.exports = router;
