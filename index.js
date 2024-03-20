@@ -35,26 +35,36 @@ const express_server = app.listen(port, () => {
     console.log(`listening on port:${port}`)
 })
 
-const ioServer = require('socket.io')(express_server)
+const ioServer = require('socket.io')(express_server, {
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"]
+    },
+});
 
 ioServer.on('connection', (socket)=>{
 
     console.log(`New user connected: ${socket.id}`)
+
     
-    socket.on('private_message', async ({toUserId, message}) =>{
+    socket.on('private_message', async (data) =>{
         try{
+            const {from_user, to_user, message} = data
             // save the private msg to the database
+            console.log(from_user, to_user, message)
+            
             const newMessage = new privateMessage({
-                from_user:socket.userId,
-                to_user:toUserId,
+                from_user,
+                to_user,
                 message,
+                time:new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes()
             })
 
             await newMessage.save()
 
             //Emit private message to recipient
 
-            ioServer.to(toUserId).emit('private_message', {from_user: socket.userId, message})
+            socket.broadcast.emit('private_message', {from_user, message})
         }catch(error){
             console.error("Error has occurred: ", error)
         }

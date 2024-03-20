@@ -3,23 +3,27 @@ import { Paper, Box, Typography, Button, IconButton, TextField } from '@mui/mate
 import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
 import io from 'socket.io-client';
+import MessageBox from './Messages'
 
-
-const socket = io('http://localhost:8080')
-
+// const URL = "http://localhost:8080"
+// const socket = io(URL,{autoConnect:true, transports: ['websocket']});
 function ChatUI({onClose}){
-    
 
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([])
     const [searchResults, setSearchResults] = useState([])
-    const [firstname, setFirstName] = useState('')
-    const [lastname, setLastName] = useState('')
+    const [fullname, setFullName] = useState('')
     const [query, setQuery] = useState('')
+    const [recipientUserId, setRecipientUserId] = useState('')
+    const [recipientName, setRecipientName] = useState('')
+
+    const [chatOpen, setChatOpen] = useState(false)
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    const { _id ,email, firstname, lastname, studentId }  = userData;
 
     const fetchUsers = async () =>{
         try{
-          const response = await fetch(`http://localhost:8080/api/v1/user/search?firstname=${firstname}&lastname=${lastname}`) 
+          const response = await fetch(`http://localhost:8080/api/v1/user/search?fullname=${fullname}`) 
             const data = await response.json()
          
           setSearchResults(data)
@@ -32,21 +36,22 @@ function ChatUI({onClose}){
     
     
 
-    useEffect(()=>{
-        socket.on('private_message', (data)=>{
-            setMessages((prevMessages) => [... prevMessages, data]);
-        })
+    // useEffect(()=>{
+    //     socket.on('private_message', (data)=>{
+    //         setMessages((prevMessages) => [... prevMessages, data]);
+    //     })
 
-        return ()=>{
-            socket.disconnect();
-        }
-    },[]);
+    //     return ()=>{
+    //         socket.disconnect();
+    //     }
+    // },[]);
 
-    const handleSendMessages = () => {
-        if(message.trim() !== ''){
-            socket.emit('private_message', {toUserId: 'recipientUserId', message});
-            setMessage('');
-        }
+
+    const handleClickUser = (userId, fullname) =>{
+        console.log('Clicked user ID:', userId)
+        setRecipientName(fullname)
+        setRecipientUserId(userId)
+        setChatOpen(true)
     }
 
     return(
@@ -58,15 +63,17 @@ function ChatUI({onClose}){
                     </Typography>
                     <Box>
                     <TextField type='text 'placeholder="Search User" variant="filled" sx={{margin:'auto'}} 
-                    value={firstname} onChange={(e) => setFirstName(e.target.value)} />
+                    value={fullname} onChange={(e) => setFullName(e.target.value)} />
                     <Button onClick={fetchUsers}>Search</Button>
                     {Array.isArray(searchResults) && searchResults.map((user) => (
-                        <p key={user._id}>{`${user.firstname}`} {`${user.lastname}`}</p>
+                        <Typography key={user._id} onClick={() => handleClickUser(user._id, `${user.firstname} ${user.lastname}`)}>
+                        {`${user.firstname} ${user.lastname}`}
+                    </Typography>    
                     ))}
 
                     </Box>
                 
-                  
+                        
                 
                 </Box>
                 <Box textAlign="right" pr="30vw"  pb="30vh">
@@ -78,21 +85,13 @@ function ChatUI({onClose}){
               
                 </Box>
                 <Box p={2}>
-                {messages.map((msg, index) => (
-                    <div key={index}>{`${msg.from_user}: ${msg.message}`}</div>
-                ))}
+                    {chatOpen && (
+                        <MessageBox recipientUserId={recipientUserId} recipientName={recipientName} onClose={() => setChatOpen(false)}/>
+                    )}
+             
                     
                 </Box>
-                <Box p={2}>
-                    <input type='text' value={message} onChange={(e)=> setMessage(e.target.value)}/>
-                    <Button onClick={handleSendMessages}>Send Message</Button>
-                </Box>
-                
-
-
-
-
-
+             
             </Paper>
         </Box>
 

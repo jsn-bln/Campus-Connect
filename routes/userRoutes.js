@@ -87,12 +87,17 @@ router.get('/admin/getusers', (req, res) => {
 })
 
 router.get('/search', async (req, res) => {
-    const {firstname, lastname} = req.query;
+    const {fullname} = req.query;
 
     try{
         let query = {};
-        if (firstname) query.firstname = {$regex:firstname, $options: 'i'}
-        if (lastname) query.lastname = {$regex:lastname, $options: 'i'}
+        if(fullname){
+            query.$or = [
+                {firstname: {$regex:fullname, $options: 'i'}},
+                {lastname: {$regex:fullname, $options: 'i'}}
+
+            ]
+        }
 
         const users = await User.find(query).limit(10)
         if(users.length == 0){
