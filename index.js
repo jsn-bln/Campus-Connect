@@ -42,29 +42,46 @@ const ioServer = require('socket.io')(express_server, {
     },
 });
 
+
+
 ioServer.on('connection', (socket)=>{
+
 
     console.log(`New user connected: ${socket.id}`)
 
-    
+    socket.on('create_room', ({userId})=>{
+        console.log('Create a room for user ID:', userId)
+        const roomId = `room_${userId}`
+        
+        socket.join(roomId)
+        socket.emit('room_created', roomId)
+        console.log('room created:', roomId)
+        
+    })
+
+
+
     socket.on('private_message', async (data) =>{
         try{
-            const {from_user, to_user, message} = data
-            // save the private msg to the database
-            console.log(from_user, to_user, message)
+            const {from_user,to_user, room_id, message} = data
             
+            // save the private msg to the database
+            console.log(from_user, to_user, message, room_id)
             const newMessage = new privateMessage({
                 from_user,
                 to_user,
+                room_id,
                 message,
-                time:new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes()
-            })
+                time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes()
+            });
 
-            await newMessage.save()
+            await newMessage.save();
+    
+            
 
-            //Emit private message to recipient
+            ioServer.to(room_id).emit('private_message', {from_user, message})
 
-            socket.broadcast.emit('private_message', {from_user, message})
+        
         }catch(error){
             console.error("Error has occurred: ", error)
         }

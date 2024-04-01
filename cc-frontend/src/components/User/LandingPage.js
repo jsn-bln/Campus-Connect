@@ -16,7 +16,7 @@ import Container from '@mui/material/Container';
 import {Link} from "react-router-dom"
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import Footer from "../Home/footer"
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import SvgIcon  from '@mui/material/SvgIcon';
@@ -174,8 +174,15 @@ export default function LandingPage() {
               </Grid>
             ))}
           </Grid>
+          
         </Container>
+       
+      
       </main>
+      <Footer/>
+
+      
+
      
     </ThemeProvider>
   );

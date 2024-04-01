@@ -6,7 +6,7 @@ import {Link} from "react-router-dom"
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import "./home.css"
-
+import Footer from "./footer"
 
 const StyledButton = styled('button')({
     backgroundColor:'blue',
@@ -61,10 +61,13 @@ function Home(){
 
             </div>
             <img className="hero-img" src={img1} alt="fav icon" />
+       
+        <Footer/>
+
 
             
-
         </div>
+       
         
     )
 }

@@ -16,7 +16,8 @@ import SocialPage from './components/User/SocialPage'
 import NavigationPage from './components/User/NavigationPage'
 import RoutinePage from './components/User/RoutinePage'
 import Details from './components/Marketplace/details'
-
+import Students from './components/Social/Students'
+import SocialProfile from './components/Social/SocialProfile';
 
 
 
@@ -42,15 +43,15 @@ function App() {
             <Route path="/User/LandingPage/SocialPage/Groups" element={<Groups/>}/>
             <Route path="/User/LandingPage/SocialPage" element={<Notifications/>}/>
             <Route path="/User/LandingPage/SocialPage/posting" element={<Posting/>}/>
+            <Route path="/User/LandingPage/SocialPage/Students" element={<Students/>}/>
+            <Route path="/User/LandingPage/SocialPage/Students/SocialProfile/:username" element={<SocialProfile/>}/>
+
+
 
 
 
           </Routes>
           
-        </div>
-
-        <div>
-          <Footer/>
         </div>
       </Router>
     </React.Fragment>

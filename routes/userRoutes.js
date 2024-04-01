@@ -114,8 +114,30 @@ router.get('/search', async (req, res) => {
     
 })
 
+router.post('/description', async (req,res)=>{
 
+    try {
+        const { userId,description} = req.body;
 
+        console.log('Received request:', req.body); 
+
+        const updatedUser = await User.findOneAndUpdate(
+            {studentId:userId},
+            {description},
+            {new: true}
+        );
+        console.log('updated user', updatedUser)
+
+        if (!updatedUser) {
+            return res.status(400).json({ message: 'User not found' });
+        }
+
+        return res.status(200).json(updatedUser);
+    } catch (error) {
+        console.error('Error updating description', error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 module.exports = router;
 

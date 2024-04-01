@@ -44,6 +44,9 @@ const userSchema = mongoose.Schema({
         enum: ['student', 'faculty', 'admin', 'club admin'],
         default:'student',
         required: true
+    },
+    description:{
+        type:String
     }
 });
 

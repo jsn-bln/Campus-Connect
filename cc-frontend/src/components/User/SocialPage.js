@@ -16,7 +16,6 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems, marketPlaceItems, navigationItems, routineItems, socialListItems } from './listItems';
 import Message from '../Social/Messages';
 import Groups from '../Social/Groups';
-import ChatUI from '../Social/ChatUI';
 import Notifications, {MessagePopOut, NotificationPopOut} from '../Social/Notifications';
 import HomeIcon from '@mui/icons-material/Home';
 import { Home } from '@mui/icons-material';
@@ -78,10 +77,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const defaultTheme = createTheme();
 
 const items = [
-  { id: 1, content: 'Front Page', path: "/User/LandingPage/SocialPage"},
-  { id: 2, content: 'Friends',  path: "/User/LandingPage/SocialPage/Friends" },
-  { id: 3, content: 'Group', path: "/User/LandingPage/SocialPage/Groups" },
-  { id: 4, content: 'Messages', path: "/User/LandingPage/SocialPage/Messages" },
+  { id: 1, content: 'Students',  path: "/User/LandingPage/SocialPage/Students" },
+  { id: 2, content: 'Group', path: "/User/LandingPage/SocialPage/Groups" },
+  { id: 3, content: 'Messages', path: "/User/LandingPage/SocialPage/Messages" },
 ];
 
 function SocialPage(){
@@ -142,12 +140,6 @@ function SocialPage(){
     setIsChatOpen(false)
   }
 
-  const handleNotificationsClick = (path) => {
-    if(path === "/User/LandingPage/SocialPage/Messages"){
-      setIsChatOpen(true)
-    }
-   
-  }
  
 
   // Side bar
@@ -184,6 +176,7 @@ function SocialPage(){
               >
                 <MenuIcon />
               </IconButton>
+              
               <Link to="/User/LandingPage" style={{color:'white'}}>
               <HomeIcon sx={{ mr: 2 }} />
               </Link>
@@ -196,12 +189,11 @@ function SocialPage(){
               <div className='main-container'>
                 {items.map((items) => (
 
-                  <Button key={items.id}className='cat-link' onClick={() => handleNotificationsClick(items.path)}>{items.content}</Button>
+                  <Button key={items.id}className='cat-link' onClick={() => navigate(items.path)}>{items.content}</Button>
                 
                   ))} 
         
             </div>
-              <TextField label="Search" variant="filled" sx={{margin:'auto'}} />
 
               <IconButton color="inherit">
                 {/* <Link to="/User/LandingPage" style={{color:'white'}}>
@@ -283,7 +275,6 @@ function SocialPage(){
 
 
           </IconButton>
-          {isChatOpen && <ChatUI onClose={handleChatToggle} />}
           {isNotificationsOpen && <Notifications onClose={handleNotificationsToggle} />}
 
 
@@ -331,6 +322,7 @@ function SocialPage(){
                   </CardContent>
                   <CardActions>
                     <Button size="small" onClick={() => navigate(post.path)}>View</Button>
+                  
                     <Button size='small' onClick={() => handleDeletePost(post._id, studentId)}>Delete</Button>
                   </CardActions>
                 </Card>
