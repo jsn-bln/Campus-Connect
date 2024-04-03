@@ -6,6 +6,8 @@ const itemRoutes = require('./routes/itemRoutes')
 const courseRoutes = require('./routes/courseRoute')
 const postRoutes = require('./routes/postRoute')
 const privateMessage = require('./model/privateMessageSchema')
+const groupRoutes = require('./routes/groupRoute')
+
  
 const cors = require("cors")
 
@@ -29,6 +31,8 @@ app.use('/api/v1/user', userRoutes);
 app.use('/api/v1/marketplace',itemRoutes);
 app.use('/api/v1/course',courseRoutes);
 app.use('/api/v1/post', postRoutes)
+app.use('/api/v1/group', groupRoutes)
+
 
 
 const express_server = app.listen(port, () => {
