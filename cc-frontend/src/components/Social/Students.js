@@ -39,7 +39,7 @@ function Students(){
         
         
        
-        <Container maxWidth="md" sx={{ height: '100vh', py: 2 }}>
+        <Container maxWidth="md" sx={{  py: 2 }}>
             <Typography variant="subtitle1" sx={{ ml: 'auto', position: 'relative', color: 'blueviolet' }}>User: {firstname} {lastname}</Typography>
 
             <Box sx={{ backgroundColor: '#333', color: 'blue', display: 'flex' }}>
